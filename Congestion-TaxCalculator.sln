@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Application", "src\CongestionTaxCalculator.Application\CongestionTaxCalculator.Application.csproj", "{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Domain", "src\CongestionTaxCalculator.Domain\CongestionTaxCalculator.Domain.csproj", "{8DC2B1D7-8724-483F-A23B-097D2C52073C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Infrastructure", "src\CongestionTaxCalculator.Infrastructure\CongestionTaxCalculator.Infrastructure.csproj", "{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Api", "src\CongestionTaxCalculator.Api\CongestionTaxCalculator.Api.csproj", "{30F53C21-065C-4628-B529-920BF4F2950E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2BCE474B-0C21-4010-B4EA-59D9B0906B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.UnitTests", "tests\CongestionTaxCalculator.UnitTests\CongestionTaxCalculator.UnitTests.csproj", "{732362A2-F292-4B9B-8043-F6E2B632A689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.IntegrationTests", "tests\CongestionTaxCalculator.IntegrationTests\CongestionTaxCalculator.IntegrationTests.csproj", "{DA4CF745-5D9C-42CF-BBE7-777F2322219B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC2B1D7-8724-483F-A23B-097D2C52073C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC2B1D7-8724-483F-A23B-097D2C52073C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC2B1D7-8724-483F-A23B-097D2C52073C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC2B1D7-8724-483F-A23B-097D2C52073C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F53C21-065C-4628-B529-920BF4F2950E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F53C21-065C-4628-B529-920BF4F2950E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F53C21-065C-4628-B529-920BF4F2950E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F53C21-065C-4628-B529-920BF4F2950E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732362A2-F292-4B9B-8043-F6E2B632A689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732362A2-F292-4B9B-8043-F6E2B632A689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732362A2-F292-4B9B-8043-F6E2B632A689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732362A2-F292-4B9B-8043-F6E2B632A689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB016840-3A75-4A7F-BBDF-BF987F0C9E0F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8DC2B1D7-8724-483F-A23B-097D2C52073C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1FED44F2-E847-4CAF-9DB1-9C9CC5FC0376} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{30F53C21-065C-4628-B529-920BF4F2950E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{732362A2-F292-4B9B-8043-F6E2B632A689} = {2BCE474B-0C21-4010-B4EA-59D9B0906B3C}
+		{DA4CF745-5D9C-42CF-BBE7-777F2322219B} = {2BCE474B-0C21-4010-B4EA-59D9B0906B3C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40476068-18A3-470B-BC9C-4F1198ABD02B}
+	EndGlobalSection
+EndGlobal
