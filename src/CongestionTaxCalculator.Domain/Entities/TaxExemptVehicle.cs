@@ -3,7 +3,7 @@ using CongestionTaxCalculator.Domain.Enums;
 
 namespace CongestionTaxCalculator.Domain.Entities
 {
-	public class TaxExemptVehicle : BaseEntity<int>
+	public class TaxExemptVehicle : AuditableBaseEntity<int>
 	{
 		public VehicleType VehicleType { get; set; }
 	}

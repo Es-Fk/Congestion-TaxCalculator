@@ -3,7 +3,7 @@ using CongestionTaxCalculator.Domain.ValueObjects;
 
 namespace CongestionTaxCalculator.Domain.Entities
 {
-	public class TaxRule : BaseEntity<int>
+	public class TaxRule : AuditableBaseEntity<int>
 	{
 		public TimeSpan StartTime { get; set; }
 		public TimeSpan EndTime { get; set; }

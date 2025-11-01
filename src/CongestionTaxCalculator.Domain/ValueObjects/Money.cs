@@ -1,6 +1,6 @@
 ﻿namespace CongestionTaxCalculator.Domain.ValueObjects
 {
-	public readonly record struct Money : IComparable<Money>
+	public record Money : IComparable<Money>
 	{
 		public decimal Amount { get; }
 		public string Currency { get; }

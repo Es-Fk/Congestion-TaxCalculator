@@ -2,7 +2,7 @@
 
 namespace CongestionTaxCalculator.Domain.Entities
 {
-	public class Holiday : BaseEntity<int>
+	public class Holiday : AuditableBaseEntity<int>
     {
         public DateOnly Date { get; set; }
         public string? Description { get; set; }

@@ -6,13 +6,13 @@ namespace CongestionTaxCalculator.Domain.Entities
 	//Aggregate Root
 	public class City : AuditableBaseEntity<int>
 	{
-		public string Name { get; set; } = default!;
-		public Money MaximumTaxPerDay { get; set; }
-		public uint SingleChargeDurationMinutes { get; set; }
-		public bool IsHolidayTaxExempt { get; set; }
-		public bool IsDayBeforeHolidayTaxExempt { get; set; }
-		public bool IsWeekendTaxExempt { get; set; }
-		public bool IsJulyTaxExempt { get; set; }
+		public string Name { get; private set; } = default!;
+		public Money MaximumTaxPerDay { get; private set; } = default!;
+		public uint SingleChargeDurationMinutes { get; private set; }
+		public bool IsHolidayTaxExempt { get; private set; }
+		public bool IsDayBeforeHolidayTaxExempt { get; private set; }
+		public bool IsWeekendTaxExempt { get; private set; }
+		public bool IsJulyTaxExempt { get; private set; }
 
 		private readonly List<TaxRule> _taxRules = new();
 		public IReadOnlyCollection<TaxRule> TaxRules => _taxRules.AsReadOnly();
