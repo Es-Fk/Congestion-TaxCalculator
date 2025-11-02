@@ -1,4 +1,4 @@
-﻿namespace CongestionTaxCalculator.Domain.Enums
+﻿namespace CongestionTaxCalculator.Domain.Entities.Enums
 {
 	public enum VehicleType
 	{

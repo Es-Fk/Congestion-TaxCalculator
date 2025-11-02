@@ -1,7 +1,8 @@
-﻿using CongestionTaxCalculator.Infrastructure.Persistence;
+﻿using CongestionTaxCalculator.Domain.Interfaces.Repositories;
+using CongestionTaxCalculator.Infrastructure.Persistence;
+using CongestionTaxCalculator.Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -13,24 +14,12 @@ namespace CongestionTaxCalculator.Infrastructure
 		public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 		{
 			var dbProvider = configuration.GetSection("DbProvider").Value;
+			var dbPprovider = DbProviderFactory.Create(dbProvider);
+			dbPprovider.Configure(services, configuration);
 
-			if (dbProvider == "SqlServer")
-			{
-				services.AddDbContext<CongestionTaxDbContext>(options =>
-				{
-					options.UseSqlServer(configuration.GetConnectionString("Persistence"));
-				});
-			}
-			else if (dbProvider == "InMemory")
-			{
-				services.AddSingleton<InMemoryDatabaseRoot>();
-				services.AddDbContext<CongestionTaxDbContext>((sp, options) =>
-				   {
-					   var root = sp.GetRequiredService<InMemoryDatabaseRoot>();
-					   options.UseInMemoryDatabase("CongestionTaxInMemoryDb", root);
-				   });
-			}
-
+			services.AddScoped<ICityRepository, CityRepository>();
+			services.AddScoped<ITollPassageRepository, TollPassageRepository>();
+			services.AddScoped<IVehicleRepository, VehicleRepository>();
 			return services;
 		}
 		public static IApplicationBuilder InitializeDatabase(this IApplicationBuilder app)

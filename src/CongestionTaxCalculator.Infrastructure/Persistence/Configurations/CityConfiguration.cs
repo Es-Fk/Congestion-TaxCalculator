@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 {
-	public class CityConfiguration : AuditableBaseEntityConfiguration<City,int>
+	public class CityConfiguration : AuditableBaseEntityConfiguration<City, int>
 	{
 		public override void Configure(EntityTypeBuilder<City> builder)
 		{
@@ -42,6 +42,20 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 			ConfigureCollection(builder, nameof(City.TaxRules));
 			ConfigureCollection(builder, nameof(City.Holidays));
 			ConfigureCollection(builder, nameof(City.TaxExemptVehicles));
+
+			builder.HasData(new
+			{
+				Id = 1,
+				Name = "Gothenburg",
+				MaximumTaxPerDay_Amount = 60m,
+				MaximumTaxPerDay_Currency = "SEK",
+				SingleChargeDurationMinutes = (uint)60,
+				IsHolidayTaxExempt = true,
+				IsDayBeforeHolidayTaxExempt = true,
+				IsWeekendTaxExempt = true,
+				IsJulyTaxExempt = true,
+				CreatedOn = DateTime.UtcNow
+			});
 		}
 
 		private static void ConfigureCollection(EntityTypeBuilder<City> builder, string navigationName)

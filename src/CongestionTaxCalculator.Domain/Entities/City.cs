@@ -8,11 +8,11 @@ namespace CongestionTaxCalculator.Domain.Entities
 	{
 		public string Name { get; private set; } = default!;
 		public Money MaximumTaxPerDay { get; private set; } = default!;
-		public uint SingleChargeDurationMinutes { get; private set; }
-		public bool IsHolidayTaxExempt { get; private set; }
-		public bool IsDayBeforeHolidayTaxExempt { get; private set; }
-		public bool IsWeekendTaxExempt { get; private set; }
-		public bool IsJulyTaxExempt { get; private set; }
+		public uint SingleChargeDurationMinutes { get; private set; } = default!;
+		public bool IsHolidayTaxExempt { get; private set; } = default!;
+		public bool IsDayBeforeHolidayTaxExempt { get; private set; } = default!;
+		public bool IsWeekendTaxExempt { get; private set; } = default!;
+		public bool IsJulyTaxExempt { get; private set; } = default!;
 
 		private readonly List<TaxRule> _taxRules = new();
 		public IReadOnlyCollection<TaxRule> TaxRules => _taxRules.AsReadOnly();

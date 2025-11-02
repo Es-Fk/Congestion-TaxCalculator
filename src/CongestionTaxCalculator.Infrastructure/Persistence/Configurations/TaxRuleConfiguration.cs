@@ -27,6 +27,12 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 				 .HasColumnName("AmountCurrency")
 				 .HasMaxLength(3);
 			});
+
+			builder.HasData(
+			   new { Id = 1, StartTime = new TimeSpan(6, 0, 0), EndTime = new TimeSpan(6, 30, 0), AmountValue = 8m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow },
+			   new { Id = 2, StartTime = new TimeSpan(6, 30, 0), EndTime = new TimeSpan(7, 0, 0), AmountValue = 13m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow },
+			   new { Id = 3, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 0, 0), AmountValue = 18m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow }
+		   );
 		}
 	}
 }
