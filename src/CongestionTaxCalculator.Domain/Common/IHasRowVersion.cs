@@ -5,6 +5,6 @@ namespace CongestionTaxCalculator.Domain.Common
     public interface IHasRowVersion
     {
         [Timestamp]
-        byte[] RowVersion { get; }
+        byte[]? RowVersion { get; }
 	}
 }

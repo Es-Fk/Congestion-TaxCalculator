@@ -1,8 +1,8 @@
-﻿using CongestionTaxCalculator.Domain.DomainServices;
+﻿using CongestionTaxCalculator.Application.Common.Exceptions;
+using CongestionTaxCalculator.Domain.DomainServices;
 using CongestionTaxCalculator.Domain.Entities;
 using CongestionTaxCalculator.Domain.Interfaces.Repositories;
 using CongestionTaxCalculator.Domain.ValueObjects;
-using CongestionTaxCalculator.Infrastructure.Exceptions;
 using MediatR;
 
 namespace CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Commands

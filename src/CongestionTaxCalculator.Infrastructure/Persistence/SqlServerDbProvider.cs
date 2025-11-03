@@ -11,6 +11,8 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence
 			services.AddDbContext<CongestionTaxDbContext>(options =>
 			{
 				options.UseSqlServer(configuration.GetConnectionString("Persistence"));
+				options.EnableSensitiveDataLogging();
+				options.AddInterceptors(new AuditableEntitySaveChangesInterceptor());
 			});
 		}
 	}

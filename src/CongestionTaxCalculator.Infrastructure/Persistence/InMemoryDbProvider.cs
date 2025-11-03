@@ -14,6 +14,9 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence
 			{
 				var root = sp.GetRequiredService<InMemoryDatabaseRoot>();
 				options.UseInMemoryDatabase("CongestionTaxInMemoryDb", root);
+				options.EnableSensitiveDataLogging();
+				options.EnableDetailedErrors();
+				options.AddInterceptors(new AuditableEntitySaveChangesInterceptor());
 			});
 		}
 	}

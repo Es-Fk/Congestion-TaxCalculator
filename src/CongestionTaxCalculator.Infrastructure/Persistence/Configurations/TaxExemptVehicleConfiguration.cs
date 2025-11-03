@@ -19,12 +19,12 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 
 
 			builder.HasData(
-				new { Id = 1,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000002"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 2,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000003"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 3,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000004"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 4,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000005"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 5,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000006"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 6,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000007"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) }
+				new { Id = 1, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000002"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 2, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000003"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 3, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000004"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 4, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000005"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 5, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000006"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 6, RowVersion = Guid.NewGuid().ToByteArray(), CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000007"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) }
 			);
 		}
 	}

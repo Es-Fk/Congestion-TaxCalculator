@@ -23,8 +23,11 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 				   .HasMaxLength(200);
 
 			builder.HasData(
-				new { Id = 1, Date = new DateOnly(2025, 1, 1), Description = "New Year’s Day",  CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
-				new { Id = 2, Date = new DateOnly(2025, 12, 25), Description = "Christmas Day", CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) }
+				new { Id = 1, Date = new DateOnly(2025, 1, 1), Description = "New Year’s Day"
+				,  CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),RowVersion = Guid.NewGuid().ToByteArray() },
+
+				new { Id = 2, Date = new DateOnly(2025, 12, 25), Description = "Christmas Day"
+				, CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),RowVersion = Guid.NewGuid().ToByteArray() }
 			);
 		}
 	}
