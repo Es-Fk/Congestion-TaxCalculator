@@ -1,0 +1,51 @@
+services:
+  congestiontaxcalculator.api:
+    image: ${DOCKER_REGISTRY-}congestiontaxcalculatorapi
+    build:
+      context: .
+      dockerfile: src/CongestionTaxCalculator.Api/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy   
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      ConnectionStrings__Persistence: "Server=db,1433;Database=CongestionTaxDb;User ID=sa;Password=MysEcP@ss10;TrustServerCertificate=True;Connection Timeout=90;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:8080;http://+:8081"
+    networks:
+      - congestiontaxcalculator-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  db:
+    container_name: sqlserver
+    hostname: sqlserver
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      SA_PASSWORD: "MysEcP@ss10"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql/
+    networks:
+      - congestiontaxcalculator-network
+    healthcheck:                    
+      test: ["CMD-SHELL", "echo 'SELECT 1' | /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD || exit 0"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  sqlserver_data:
+
+networks:
+  congestiontaxcalculator-network:
+    driver: bridge
