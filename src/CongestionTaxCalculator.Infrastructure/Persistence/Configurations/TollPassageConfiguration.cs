@@ -11,6 +11,9 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 			base.Configure(builder);
 
 			builder.ToTable("TollPassages");
+			builder.HasKey(tr => tr.Id);
+			builder.Property(tr => tr.Id).ValueGeneratedOnAdd();
+
 
 			builder.Property(tp => tp.PassageTime)
 				.IsRequired();

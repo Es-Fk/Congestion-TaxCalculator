@@ -1,13 +1,13 @@
-﻿using CongestionTaxCalculator.Application.Dtos;
-using CongestionTaxCalculator.Domain.DomainServices;
+﻿using CongestionTaxCalculator.Domain.DomainServices;
 using CongestionTaxCalculator.Domain.Entities;
 using CongestionTaxCalculator.Domain.Interfaces.Repositories;
+using CongestionTaxCalculator.Domain.ValueObjects;
 using CongestionTaxCalculator.Infrastructure.Exceptions;
 using MediatR;
 
 namespace CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Commands
 {
-	public class CalculateCongestionTaxCommandHandler: IRequestHandler<CalculateCongestionTaxCommand, CalculateCongestionTaxResult>
+	public class CalculateCongestionTaxCommandHandler : IRequestHandler<CalculateCongestionTaxCommand, Money>
 	{
 		private readonly ICityRepository _cityRepository;
 		private readonly IVehicleRepository _vehicleRepository;
@@ -23,26 +23,20 @@ namespace CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Co
 			_taxCalculator = taxCalculator;
 		}
 
-		public async Task<CalculateCongestionTaxResult> Handle(
+		public async Task<Money> Handle(
 			CalculateCongestionTaxCommand request,
 			CancellationToken cancellationToken)
 		{
-			var city = await _cityRepository.GetByIdAsync(request.CityId, cancellationToken);
+			var city = await _cityRepository.GetByNameAsync(request.CityName, cancellationToken);
 			if (city == null)
-				throw new NotFoundException(nameof(City), request.CityId);
+				throw new NotFoundException(nameof(City), request.CityName);
 
-			var vehicle = await _vehicleRepository.GetByIdAsync(request.VehicleId, cancellationToken);
+			var vehicle = await _vehicleRepository.GetByTypeAsync(request.VehicleType, cancellationToken);
 			if (vehicle == null)
-				throw new NotFoundException(nameof(Vehicle), request.VehicleId);
+				throw new NotFoundException(nameof(Vehicle), request.VehicleType);
 
-			var tax = _taxCalculator.CalculateTax(city, vehicle, request.PassageTimes);
+			return _taxCalculator.CalculateTax(city, vehicle, request.PassageTimes);
 
-			return new CalculateCongestionTaxResult(
-				city.Name,
-				vehicle.RegistrationNumber,
-				tax.Amount,
-				request.PassageTimes.Count
-			);
 		}
 	}
 

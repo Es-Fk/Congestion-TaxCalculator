@@ -1,15 +1,15 @@
 ﻿using CongestionTaxCalculator.Domain.Common;
-using CongestionTaxCalculator.Domain.Entities.Enums;
 
 namespace CongestionTaxCalculator.Domain.Entities
 {
 	public class TaxExemptVehicle : AuditableBaseEntity<int>
 	{
-		public VehicleType VehicleType { get; private set; }
+		public Vehicle Vehicle { get; private set; }
+		public Guid VehicleId { get; private set; }
 		public TaxExemptVehicle() { }
-		public TaxExemptVehicle(VehicleType vehicleType)
+		public TaxExemptVehicle(Vehicle vehicle)
 		{
-			VehicleType = vehicleType;
+			Vehicle = vehicle;
 		}
 	}
 }

@@ -10,6 +10,7 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 		{
 			builder.ToTable("TaxRules");
 			builder.HasKey(tr => tr.Id);
+			builder.Property(tr => tr.Id).ValueGeneratedOnAdd();
 
 			builder.Property(tr => tr.StartTime)
 				   .IsRequired();
@@ -29,10 +30,37 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 			});
 
 			builder.HasData(
-			   new { Id = 1, StartTime = new TimeSpan(6, 0, 0), EndTime = new TimeSpan(6, 30, 0), AmountValue = 8m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow },
-			   new { Id = 2, StartTime = new TimeSpan(6, 30, 0), EndTime = new TimeSpan(7, 0, 0), AmountValue = 13m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow },
-			   new { Id = 3, StartTime = new TimeSpan(7, 0, 0), EndTime = new TimeSpan(8, 0, 0), AmountValue = 18m, AmountCurrency = "SEK", CreatedOn = DateTime.UtcNow }
-		   );
+				new
+				{
+					Id = 1,
+					CityId = 1,
+					StartTime = new TimeSpan(6, 0, 0),
+					EndTime = new TimeSpan(6, 30, 0),
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+				},
+				new
+				{
+					Id = 2,
+					CityId = 1,
+					StartTime = new TimeSpan(6, 30, 0),
+					EndTime = new TimeSpan(7, 0, 0),
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+				},
+				new
+				{
+					Id = 3,
+					CityId = 1,
+					StartTime = new TimeSpan(7, 0, 0),
+					EndTime = new TimeSpan(8, 0, 0),
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+				}
+			);
+
+			builder.OwnsOne(c => c.Amount).HasData(
+				new { TaxRuleId = 1, Amount = 8m, Currency = "SEK" },
+				new { TaxRuleId = 2, Amount = 13m, Currency = "SEK" },
+				new { TaxRuleId = 3, Amount = 18m, Currency = "SEK" }
+			);
 		}
 	}
 }

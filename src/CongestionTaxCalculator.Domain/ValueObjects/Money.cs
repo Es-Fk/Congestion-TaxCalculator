@@ -54,6 +54,18 @@
 			return a.Amount / b.Amount;
 		}
 
+		public static Money Min(Money a, Money b)
+		{
+			EnsureSameCurrency(a, b);
+			return a.Amount <= b.Amount ? a : b;
+		}
+
+		public static Money Max(Money a, Money b)
+		{
+			EnsureSameCurrency(a, b);
+			return a.Amount >= b.Amount ? a : b;
+		}
+
 		// Comparison method
 		public int CompareTo(Money other)
 		{

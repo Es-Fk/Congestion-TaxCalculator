@@ -14,7 +14,7 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Repositories
 		{
 			if (passage is null) throw new ArgumentNullException(nameof(passage));
 
-			_dbContext.Set<TollPassage>().Add(passage);
+			_dbContext.TollPassages.Add(passage);
 			await _dbContext.SaveChangesAsync(ct).ConfigureAwait(false);
 		}
 
@@ -23,7 +23,7 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Repositories
 			var start = date.Date;
 			var end = start.AddDays(1);
 
-			var list = await _dbContext.Set<TollPassage>()
+			var list = await _dbContext.TollPassages
 				.AsNoTracking()
 				.Where(p => p.VehicleId == vehicleId && p.PassageTime >= start && p.PassageTime < end)
 				.OrderBy(p => p.PassageTime)

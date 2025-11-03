@@ -12,14 +12,13 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 
 			builder.ToTable("Cities");
 			builder.HasKey(c => c.Id);
+			builder.Property(tr => tr.Id).ValueGeneratedOnAdd();
 
 			builder.Property(c => c.Name)
 				   .IsRequired()
 				   .HasMaxLength(200);
 
-			builder.Property(c => c.SingleChargeDurationMinutes)
-				   .HasConversion<int>()
-				   .HasColumnName("SingleChargeDurationMinutes");
+			builder.Property(c => c.SingleChargeDurationMinutes);
 
 			builder.Property(c => c.IsHolidayTaxExempt).IsRequired();
 			builder.Property(c => c.IsDayBeforeHolidayTaxExempt).IsRequired();
@@ -47,15 +46,20 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 			{
 				Id = 1,
 				Name = "Gothenburg",
-				MaximumTaxPerDay_Amount = 60m,
-				MaximumTaxPerDay_Currency = "SEK",
-				SingleChargeDurationMinutes = (uint)60,
+				SingleChargeDurationMinutes = 60,
 				IsHolidayTaxExempt = true,
 				IsDayBeforeHolidayTaxExempt = true,
 				IsWeekendTaxExempt = true,
 				IsJulyTaxExempt = true,
-				CreatedOn = DateTime.UtcNow
+				CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
 			});
+			builder.OwnsOne(c => c.MaximumTaxPerDay).HasData(
+			new {
+					CityId = 1, 
+					Amount = 60m,
+					Currency = "SEK"
+				}
+			);
 		}
 
 		private static void ConfigureCollection(EntityTypeBuilder<City> builder, string navigationName)

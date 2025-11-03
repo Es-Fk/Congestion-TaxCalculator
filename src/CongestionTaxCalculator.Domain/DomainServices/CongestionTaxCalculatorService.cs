@@ -8,110 +8,96 @@ namespace CongestionTaxCalculator.Domain.DomainServices
 	{
 		private readonly IVehicleTaxExemptionService _vehicleExemptionService;
 		private readonly IHolidayService _holidayService;
-
-		public CongestionTaxCalculatorService(
-			IVehicleTaxExemptionService vehicleExemptionService,
-			IHolidayService holidayService)
+		private readonly ITaxRuleService _taxRuleService;
+		public CongestionTaxCalculatorService()
 		{
-			_vehicleExemptionService = vehicleExemptionService;
-			_holidayService = holidayService;
+			_vehicleExemptionService = new VehicleTaxExemptionService();
+			_holidayService = new HolidayService();
+			_taxRuleService = new TaxRuleService();
 		}
 
 		public Money CalculateTax(City city, Vehicle vehicle, IEnumerable<DateTime> passages)
 		{
-			if (city == null) throw new ArgumentNullException(nameof(city));
-			if (vehicle == null) throw new ArgumentNullException(nameof(vehicle));
-			if (passages == null) throw new ArgumentNullException(nameof(passages));
+			ArgumentNullException.ThrowIfNull(city);
+			ArgumentNullException.ThrowIfNull(vehicle);
+			ArgumentNullException.ThrowIfNull(passages);
 
 			if (_vehicleExemptionService.IsTaxExempt(vehicle, city))
 				return Money.Zero();
 
-			var total = Money.Zero();
+			var groupedByDay = passages.OrderBy(p => p).GroupBy(p => p.Date);
+			Money totalTax = Money.Zero();
 
-			
-			var days = passages.OrderBy(p => p).GroupBy(p => p.Date);
-			foreach (var dayGroup in days)
+			foreach (var day in groupedByDay)
 			{
-				var dayPassages = dayGroup.OrderBy(p => p).ToList();
-				var dayTotal = Money.Zero();
-				DateTime? intervalStart = null;
-				var maxTaxInWindow = Money.Zero();
-				// TODO: make this loop as function
-				foreach (var time in dayPassages)
-				{
-					if (IsTaxFreeDate(time, city))
-						continue;
+				var dayPassages = day.OrderBy(p => p).ToList();
+				var dayTax = CalculateDailyTax(dayPassages, city);
 
-					var tax = GetTollFee(time, city);
-
-					// Initialize interval on first taxable passage
-					if (intervalStart == null)
-					{
-						intervalStart = time;
-						maxTaxInWindow = tax;
-						continue;
-					}
-
-					var minutes = (time - intervalStart.Value).TotalMinutes;
-					if (minutes <= city.SingleChargeDurationMinutes)
-					{
-						// Within single charge window: take the highest fee
-						if (tax.CompareTo(maxTaxInWindow) > 0)
-							maxTaxInWindow = tax;
-					}
-					else
-					{
-						// Outside window: add the recorded max and start a new window
-						dayTotal += maxTaxInWindow;
-						intervalStart = time;
-						maxTaxInWindow = tax;
-					}
-				}
-
-				// Add remaining window's max fee (if any)
-				dayTotal += maxTaxInWindow;
-
-				// Apply daily maximum cap
-				if (dayTotal.CompareTo(city.MaximumTaxPerDay) > 0)
-					dayTotal = city.MaximumTaxPerDay;
-
-				total += dayTotal;
+				// Apply daily cap
+				totalTax += Money.Min(dayTax, city.MaximumTaxPerDay);
 			}
 
-			return total;
+			return totalTax;
+		}
+
+		private Money CalculateDailyTax(List<DateTime> passages, City city)
+		{
+			if (passages == null || !passages.Any())
+				return Money.Zero();
+
+			Money dayTotal = Money.Zero();
+			DateTime? windowStart = null;
+			Money maxTaxInWindow = Money.Zero();
+
+			foreach (var passage in passages)
+			{
+				if (IsTaxFreeDate(passage, city))
+					continue;
+
+				var tax = _taxRuleService.GetTaxForTime(passage, city);
+
+				if (windowStart == null)
+				{
+					windowStart = passage;
+					maxTaxInWindow = tax;
+					continue;
+				}
+
+				var diffMinutes = (passage - windowStart.Value).TotalMinutes;
+
+				if (diffMinutes <= city.SingleChargeDurationMinutes)
+				{
+					maxTaxInWindow = Money.Max(maxTaxInWindow, tax);
+				}
+				else
+				{
+					dayTotal += maxTaxInWindow;
+					windowStart = passage;
+					maxTaxInWindow = tax;
+				}
+			}
+
+			dayTotal += maxTaxInWindow;
+
+			return dayTotal;
 		}
 
 		private bool IsTaxFreeDate(DateTime date, City city)
 		{
-			if (city == null) throw new ArgumentNullException(nameof(city));
-
-			// Weekend exemption
-			if (city.IsWeekendTaxExempt && (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday))
+			if (city.IsWeekendTaxExempt && date.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
 				return true;
 
-			// Holiday exemptions (use date.Date for consistency)
-			var dateOnly = date.Date;
-			if (city.IsHolidayTaxExempt && _holidayService.IsHoliday(dateOnly, city))
+			if (city.IsHolidayTaxExempt && _holidayService.IsHoliday(date, city))
 				return true;
 
-			if (city.IsDayBeforeHolidayTaxExempt && _holidayService.IsDayBeforeHoliday(dateOnly, city))
+			if (city.IsDayBeforeHolidayTaxExempt && _holidayService.IsDayBeforeHoliday(date, city))
 				return true;
 
-			// July exemption
 			if (city.IsJulyTaxExempt && date.Month == 7)
 				return true;
 
 			return false;
 		}
 
-		private Money GetTollFee(DateTime time, City city)
-		{
-			if (city == null) throw new ArgumentNullException(nameof(city));
-
-			var rule = city.TaxRules?.FirstOrDefault(r => r.IsApplicable(time))
-			           ?? city.TaxRules?.FirstOrDefault(r => time.TimeOfDay >= r.StartTime && time.TimeOfDay <= r.EndTime);
-
-			return rule?.Amount ?? Money.Zero();
-		}
 	}
 }

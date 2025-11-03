@@ -1,6 +1,56 @@
 @CongestionTaxCalculator.Api_HostAddress = http://localhost:5043
 
-GET {{CongestionTaxCalculator.Api_HostAddress}}/weatherforecast/
+### Single vehicle - Example 1 (multiple passages same day / rush hours)
+POST {{CongestionTaxCalculator.Api_HostAddress}}/api/tax/calc
 Accept: application/json
+Content-Type: application/json
+
+{
+  "vehicle": "Car",
+  "dates": [
+    "2013-01-14T06:00:00",
+    "2013-01-14T06:20:00",
+    "2013-01-14T07:15:00",
+    "2013-01-14T08:05:00",
+    "2013-01-14T15:30:00",
+    "2013-01-14T16:10:00",
+    "2013-01-14T17:25:00",
+    "2013-01-14T18:45:00"
+  ]
+}
+
+###
+
+### Single vehicle - Example 2 (single day, clustered times within 60 minutes)
+POST {{CongestionTaxCalculator.Api_HostAddress}}/api/tax/calc
+Accept: application/json
+Content-Type: application/json
+
+{
+  "vehicle": "Car",
+  "dates": [
+    "2013-02-07T06:23:27",
+    "2013-02-07T06:47:00",
+    "2013-02-07T07:01:00",
+    "2013-02-07T07:45:00"
+  ]
+}
+
+###
+
+### Single vehicle - Example 3 (spans multiple days)
+POST {{CongestionTaxCalculator.Api_HostAddress}}/api/tax/calc
+Accept: application/json
+Content-Type: application/json
+
+{
+  "vehicle": "Car",
+  "dates": [
+    "2013-02-07T06:23:27",
+    "2013-02-08T15:27:00",
+    "2013-02-08T15:47:00",
+    "2013-02-09T16:01:00"
+  ]
+}
 
 ###

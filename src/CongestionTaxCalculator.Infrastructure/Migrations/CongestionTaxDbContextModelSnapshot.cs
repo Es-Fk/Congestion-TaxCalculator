@@ -69,8 +69,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<int>("SingleChargeDurationMinutes")
-                        .HasColumnType("int")
-                        .HasColumnName("SingleChargeDurationMinutes");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -80,7 +79,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 130, DateTimeKind.Utc).AddTicks(6076),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             IsDayBeforeHolidayTaxExempt = true,
                             IsHolidayTaxExempt = true,
                             IsJulyTaxExempt = true,
@@ -136,14 +135,14 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 130, DateTimeKind.Utc).AddTicks(9814),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             Date = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "New Year’s Day"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 130, DateTimeKind.Utc).AddTicks(9817),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             Date = new DateTime(2025, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Christmas Day"
                         });
@@ -178,12 +177,14 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("VehicleType")
-                        .HasColumnType("int");
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("TaxExemptVehicles", (string)null);
 
@@ -191,38 +192,44 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1881),
-                            VehicleType = 4
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1882),
-                            VehicleType = 2
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1883),
-                            VehicleType = 1
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1884),
-                            VehicleType = 5
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1885),
-                            VehicleType = 3
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 131, DateTimeKind.Utc).AddTicks(1885),
-                            VehicleType = 6
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            VehicleId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
 
@@ -271,21 +278,24 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 135, DateTimeKind.Utc).AddTicks(2881),
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 6, 30, 0, 0),
                             StartTime = new TimeSpan(0, 6, 0, 0, 0)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 135, DateTimeKind.Utc).AddTicks(2884),
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 7, 0, 0, 0),
                             StartTime = new TimeSpan(0, 6, 30, 0, 0)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 135, DateTimeKind.Utc).AddTicks(2886),
+                            CityId = 1,
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 8, 0, 0, 0),
                             StartTime = new TimeSpan(0, 7, 0, 0, 0)
                         });
@@ -345,24 +355,28 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
-                        .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
@@ -371,7 +385,58 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicle");
+                    b.ToTable("Vehicles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "ABC123",
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "DEF456",
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "GHI789",
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "JKL012",
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "MNO345",
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "PQR678",
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RegistrationNumber = "STU901",
+                            VehicleType = 6
+                        });
                 });
 
             modelBuilder.Entity("CongestionTaxCalculator.Domain.Entities.City", b =>
@@ -397,6 +462,14 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("CityId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    CityId = 1,
+                                    Amount = 60m,
+                                    Currency = "SEK"
+                                });
                         });
 
                     b.Navigation("MaximumTaxPerDay")
@@ -417,6 +490,14 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                         .WithMany("TaxExemptVehicles")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CongestionTaxCalculator.Domain.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("CongestionTaxCalculator.Domain.Entities.TaxRule", b =>
@@ -447,6 +528,26 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("TaxRuleId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    TaxRuleId = 1,
+                                    Amount = 8m,
+                                    Currency = "SEK"
+                                },
+                                new
+                                {
+                                    TaxRuleId = 2,
+                                    Amount = 13m,
+                                    Currency = "SEK"
+                                },
+                                new
+                                {
+                                    TaxRuleId = 3,
+                                    Amount = 18m,
+                                    Currency = "SEK"
+                                });
                         });
 
                     b.Navigation("Amount")

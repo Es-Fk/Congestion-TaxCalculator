@@ -1,6 +1,13 @@
+﻿using CongestionTaxCalculator.Api.Middlewares;
+using CongestionTaxCalculator.Application;
 using CongestionTaxCalculator.Infrastructure;
-using Serilog;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
+//for desing time migrations
 var configuration = new ConfigurationBuilder()
 		  .SetBasePath(Directory.GetCurrentDirectory())
 		  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -9,58 +16,99 @@ var configuration = new ConfigurationBuilder()
 		  .Build();
 
 
-Log.Logger = new LoggerConfiguration()
-	.WriteTo.Console()
-	.Enrich.FromLogContext()
-	.CreateBootstrapLogger();
+var builder = WebApplication.CreateBuilder(args);
 
-try
+builder.Services.AddCors(options =>
 {
-	Log.Information("Application starting...");
+	options.AddPolicy("Allow*",
+		builder => builder
+			.AllowAnyOrigin()
+			.AllowAnyMethod()
+			.AllowAnyHeader());
+});
 
-	var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
 
-	builder.Host.UseSerilog((hostContext, services, loggerConfiguration) =>
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new OpenApiInfo
 	{
-		loggerConfiguration
-			.ReadFrom.Configuration(hostContext.Configuration)
-			.Enrich.FromLogContext();
+		Title = "Congestion Tax Calculator API",
+		Version = "v1",
+		Description = "API for congestion tax calculator"
+	});
+	c.ExampleFilters();
+});
+
+builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
+
+builder.Services.AddControllers()
+	.ConfigureApiBehaviorOptions(options =>
+	{
+		options.InvalidModelStateResponseFactory = context =>
+		{
+			var errors = context.ModelState
+				.Where(e => e.Value.Errors.Count > 0)
+				.ToDictionary(
+					kvp => kvp.Key,
+					kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+				);
+
+			var problemDetails = new ValidationProblemDetails(errors)
+			{
+				Title = "Invalid request",
+				Status = StatusCodes.Status400BadRequest,
+				Detail = "One or more validation errors occurred during model binding.",
+				Instance = context.HttpContext.Request.Path
+			};
+
+			problemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+
+			return new BadRequestObjectResult(problemDetails)
+			{
+				ContentTypes = { "application/problem+json" }
+			};
+		};
+	})
+	.AddJsonOptions(options =>
+	{
+		options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 	});
 
-	builder.Services.AddInfrastructure(configuration);
 
-	builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
 
-	builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddExceptionHandler<ExceptionHandling>();
 
-	builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-	var app = builder.Build();
+builder.Services.AddInfrastructure(configuration);
 
-	if (app.Environment.IsDevelopment())
-	{
-		app.UseDeveloperExceptionPage();
-		app.UseSwagger();
-		app.UseSwaggerUI();
-	}
+builder.Services.AddApplicationServices();
 
-	app.InitializeDatabase();
 
-	app.UseHttpsRedirection();
+var app = builder.Build();
 
-	app.UseRouting();
+app.UseExceptionHandler();
 
-	app.UseAuthorization();
+app.InitializeDatabase();
 
-	app.MapControllers();
+app.UseCors("Allow*");
 
-	app.Run();
-}
-catch (Exception ex)
+app.UseRouting();
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
 {
-	Log.Fatal(ex, "Application terminated unexpectedly");
-}
-finally
-{
-	Log.CloseAndFlush();
-}
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Congestion Tax Calculator v1");
+});
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+app.Run();
+
+public partial class Program { }
+

@@ -7,7 +7,7 @@ namespace CongestionTaxCalculator.Domain.DomainServices
 	{
 		public bool IsTaxExempt(Vehicle vehicle, City city)
 		{
-			return city.TaxExemptVehicles.Any(e => e.VehicleType == vehicle.VehicleType);
+			return city.TaxExemptVehicles.Any(e => e.Vehicle.VehicleType == vehicle.VehicleType);
 		}
 	}
 }

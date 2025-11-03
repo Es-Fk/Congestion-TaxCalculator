@@ -1,5 +1,4 @@
 ﻿using CongestionTaxCalculator.Domain.Entities;
-using CongestionTaxCalculator.Domain.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,17 +10,21 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 		{
 			builder.ToTable("TaxExemptVehicles");
 			builder.HasKey(ev => ev.Id);
+			builder.Property(tr => tr.Id).ValueGeneratedOnAdd();
 
-			builder.Property(ev => ev.VehicleType)
-				   .IsRequired()
-				   .HasConversion<int>();
+			builder.HasOne(te => te.Vehicle)
+				   .WithMany()
+				   .HasForeignKey(te => te.VehicleId)
+				   .OnDelete(DeleteBehavior.Cascade);
+
+
 			builder.HasData(
-				new { Id = 1, VehicleType = VehicleType.Motorcycle, CreatedOn = DateTime.UtcNow },
-				new { Id = 2, VehicleType = VehicleType.Bus, CreatedOn = DateTime.UtcNow },
-				new { Id = 3, VehicleType = VehicleType.Emergency, CreatedOn = DateTime.UtcNow },
-				new { Id = 4, VehicleType = VehicleType.Military, CreatedOn = DateTime.UtcNow },
-				new { Id = 5, VehicleType = VehicleType.Diplomat, CreatedOn = DateTime.UtcNow },
-				new { Id = 6, VehicleType = VehicleType.Foreign, CreatedOn = DateTime.UtcNow }
+				new { Id = 1,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000002"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 2,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000003"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 3,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000004"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 4,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000005"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 5,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000006"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) },
+				new { Id = 6,CityId = 1, VehicleId = Guid.Parse("00000000-0000-0000-0000-000000000007"), CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc) }
 			);
 		}
 	}
