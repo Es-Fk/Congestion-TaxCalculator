@@ -85,6 +85,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             IsJulyTaxExempt = true,
                             IsWeekendTaxExempt = true,
                             Name = "Gothenburg",
+                            RowVersion = new byte[] { 145, 236, 2, 68, 100, 140, 29, 69, 187, 161, 174, 97, 61, 189, 123, 86 },
                             SingleChargeDurationMinutes = 60
                         });
                 });
@@ -137,14 +138,16 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             Date = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "New Year’s Day"
+                            Description = "New Year’s Day",
+                            RowVersion = new byte[] { 170, 181, 177, 190, 18, 230, 192, 74, 169, 27, 152, 77, 127, 228, 231, 85 }
                         },
                         new
                         {
                             Id = 2,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             Date = new DateTime(2025, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Christmas Day"
+                            Description = "Christmas Day",
+                            RowVersion = new byte[] { 168, 76, 212, 210, 51, 20, 188, 70, 140, 110, 61, 21, 79, 16, 49, 201 }
                         });
                 });
 
@@ -194,6 +197,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 1,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 60, 186, 144, 32, 209, 198, 119, 65, 130, 225, 209, 223, 246, 168, 95, 217 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
@@ -201,6 +205,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 2,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 63, 79, 20, 135, 166, 52, 4, 71, 143, 160, 36, 213, 7, 155, 182, 45 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
@@ -208,6 +213,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 3,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 167, 175, 107, 144, 21, 210, 107, 65, 139, 116, 190, 117, 214, 255, 18, 88 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
@@ -215,6 +221,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 4,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 150, 200, 54, 15, 236, 87, 107, 70, 190, 43, 250, 55, 185, 234, 192, 95 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
@@ -222,6 +229,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 5,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 109, 28, 123, 220, 210, 179, 175, 73, 150, 158, 11, 64, 49, 106, 204, 124 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
@@ -229,6 +237,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             Id = 6,
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
+                            RowVersion = new byte[] { 54, 29, 191, 129, 99, 149, 218, 78, 157, 125, 131, 182, 17, 27, 253, 154 },
                             VehicleId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -281,6 +290,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 6, 30, 0, 0),
+                            RowVersion = new byte[] { 211, 148, 148, 184, 97, 181, 186, 78, 137, 202, 212, 72, 141, 111, 179, 180 },
                             StartTime = new TimeSpan(0, 6, 0, 0, 0)
                         },
                         new
@@ -289,6 +299,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 7, 0, 0, 0),
+                            RowVersion = new byte[] { 108, 230, 210, 53, 21, 93, 198, 78, 165, 236, 188, 195, 228, 254, 215, 27 },
                             StartTime = new TimeSpan(0, 6, 30, 0, 0)
                         },
                         new
@@ -297,6 +308,7 @@ namespace CongestionTaxCalculator.Infrastructure.Migrations
                             CityId = 1,
                             CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, 0, DateTimeKind.Utc),
                             EndTime = new TimeSpan(0, 8, 0, 0, 0),
+                            RowVersion = new byte[] { 242, 165, 29, 25, 178, 33, 33, 69, 150, 98, 235, 159, 116, 71, 38, 53 },
                             StartTime = new TimeSpan(0, 7, 0, 0, 0)
                         });
                 });

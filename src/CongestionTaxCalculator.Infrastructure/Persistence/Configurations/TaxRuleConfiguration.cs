@@ -36,7 +36,8 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 					CityId = 1,
 					StartTime = new TimeSpan(6, 0, 0),
 					EndTime = new TimeSpan(6, 30, 0),
-					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),
+					RowVersion = Guid.NewGuid().ToByteArray()
 				},
 				new
 				{
@@ -44,7 +45,8 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 					CityId = 1,
 					StartTime = new TimeSpan(6, 30, 0),
 					EndTime = new TimeSpan(7, 0, 0),
-					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),
+					RowVersion = Guid.NewGuid().ToByteArray()
 				},
 				new
 				{
@@ -52,7 +54,8 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 					CityId = 1,
 					StartTime = new TimeSpan(7, 0, 0),
 					EndTime = new TimeSpan(8, 0, 0),
-					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+					CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),
+					RowVersion = Guid.NewGuid().ToByteArray()
 				}
 			);
 

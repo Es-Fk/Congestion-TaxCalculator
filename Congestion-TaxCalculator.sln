@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2BCE474B-0C21-4010-B4EA-59D9B0906B3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.UnitTests", "tests\CongestionTaxCalculator.UnitTests\CongestionTaxCalculator.UnitTests.csproj", "{732362A2-F292-4B9B-8043-F6E2B632A689}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Domain.UnitTests", "tests\CongestionTaxCalculator.Domain.UnitTests\CongestionTaxCalculator.Domain.UnitTests.csproj", "{732362A2-F292-4B9B-8043-F6E2B632A689}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.IntegrationTests", "tests\CongestionTaxCalculator.IntegrationTests\CongestionTaxCalculator.IntegrationTests.csproj", "{DA4CF745-5D9C-42CF-BBE7-777F2322219B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTaxCalculator.Aplication.UnitTests", "tests\CongestionTaxCalculator.Aplication.UnitTests\CongestionTaxCalculator.Aplication.UnitTests.csproj", "{049BCE6C-7746-42D7-ABE5-21F0C1B047C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA4CF745-5D9C-42CF-BBE7-777F2322219B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049BCE6C-7746-42D7-ABE5-21F0C1B047C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049BCE6C-7746-42D7-ABE5-21F0C1B047C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049BCE6C-7746-42D7-ABE5-21F0C1B047C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049BCE6C-7746-42D7-ABE5-21F0C1B047C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{30F53C21-065C-4628-B529-920BF4F2950E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{732362A2-F292-4B9B-8043-F6E2B632A689} = {2BCE474B-0C21-4010-B4EA-59D9B0906B3C}
 		{DA4CF745-5D9C-42CF-BBE7-777F2322219B} = {2BCE474B-0C21-4010-B4EA-59D9B0906B3C}
+		{049BCE6C-7746-42D7-ABE5-21F0C1B047C0} = {2BCE474B-0C21-4010-B4EA-59D9B0906B3C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40476068-18A3-470B-BC9C-4F1198ABD02B}

@@ -51,7 +51,8 @@ namespace CongestionTaxCalculator.Infrastructure.Persistence.Configurations
 				IsDayBeforeHolidayTaxExempt = true,
 				IsWeekendTaxExempt = true,
 				IsJulyTaxExempt = true,
-				CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc)
+				CreatedOn = new DateTime(2025, 11, 2, 12, 32, 14, DateTimeKind.Utc),
+				RowVersion = Guid.NewGuid().ToByteArray()
 			});
 			builder.OwnsOne(c => c.MaximumTaxPerDay).HasData(
 			new {
