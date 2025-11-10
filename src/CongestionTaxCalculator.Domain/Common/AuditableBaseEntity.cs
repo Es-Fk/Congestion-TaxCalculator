@@ -1,4 +1,6 @@
-﻿namespace CongestionTaxCalculator.Domain.Common
+﻿using CongestionTaxCalculator.Domain.Common.Interfaces;
+
+namespace CongestionTaxCalculator.Domain.Common
 {
 	public abstract class AuditableBaseEntity<TKey> : BaseEntity<TKey>, IAuditableEntity
 	{

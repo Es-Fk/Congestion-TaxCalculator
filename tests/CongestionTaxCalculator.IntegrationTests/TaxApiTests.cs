@@ -1,5 +1,5 @@
 ﻿using CongestionTaxCalculator.Api.Dtos;
-using CongestionTaxCalculator.Domain.Entities.Enums;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 using System.Net.Http.Json;
 
 namespace CongestionTaxCalculator.IntegrationTests

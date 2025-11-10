@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CongestionTaxCalculator.Domain.Common.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace CongestionTaxCalculator.Domain.Common
 {
