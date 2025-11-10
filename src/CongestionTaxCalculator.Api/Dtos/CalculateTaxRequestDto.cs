@@ -1,4 +1,4 @@
-﻿using CongestionTaxCalculator.Domain.Entities.Enums;
+﻿using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace CongestionTaxCalculator.Api.Dtos

@@ -1,6 +1,10 @@
-﻿using CongestionTaxCalculator.Domain.Interfaces.Repositories;
-using CongestionTaxCalculator.Infrastructure.Persistence;
-using CongestionTaxCalculator.Infrastructure.Persistence.Repositories;
+﻿using CongestionTaxCalculator.Domain.CityManagement.Repositories;
+using CongestionTaxCalculator.Domain.TaxCalculation.Repositories;
+using CongestionTaxCalculator.Infrastructure.Persistence.DbContexts;
+using CongestionTaxCalculator.Infrastructure.Persistence.DbProviders;
+using CongestionTaxCalculator.Infrastructure.Persistence.Repositories.CityManagement;
+using CongestionTaxCalculator.Infrastructure.Persistence.Repositories.TaxCalculation;
+using CongestionTaxCalculator.Infrastructure.Persistence.Repositories.VehicleManagement;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,9 +21,9 @@ namespace CongestionTaxCalculator.Infrastructure
 			var dbPprovider = DbProviderFactory.Create(dbProvider);
 			dbPprovider.Configure(services, configuration);
 
-			services.AddScoped<ICityRepository, CityRepository>();
-			services.AddScoped<ITollPassageRepository, TollPassageRepository>();
-			services.AddScoped<IVehicleRepository, VehicleRepository>();
+			services.AddScoped<ICityRepository, CityRepository>()
+				.AddScoped<ITollPassageRepository, TollPassageRepository>()
+				.AddScoped<IVehicleRepository, VehicleRepository>();
 			return services;
 		}
 		public static IApplicationBuilder InitializeDatabase(this IApplicationBuilder app)

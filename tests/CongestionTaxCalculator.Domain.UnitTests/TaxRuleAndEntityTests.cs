@@ -1,7 +1,8 @@
-﻿using CongestionTaxCalculator.Domain.DomainServices;
-using CongestionTaxCalculator.Domain.Entities;
-using CongestionTaxCalculator.Domain.Entities.Enums;
-using CongestionTaxCalculator.Domain.ValueObjects;
+﻿using CongestionTaxCalculator.Domain.CityManagement.Entities;
+using CongestionTaxCalculator.Domain.TaxCalculation.DomainServices;
+using CongestionTaxCalculator.Domain.TaxCalculation.Entities;
+using CongestionTaxCalculator.Domain.TaxCalculation.ValueObjects;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 
 namespace CongestionTaxCalculator.Domain.UnitTests
 {

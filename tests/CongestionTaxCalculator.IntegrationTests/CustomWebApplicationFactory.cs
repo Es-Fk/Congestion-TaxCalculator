@@ -1,7 +1,8 @@
-﻿using CongestionTaxCalculator.Domain.Entities;
-using CongestionTaxCalculator.Domain.Entities.Enums;
-using CongestionTaxCalculator.Domain.ValueObjects;
-using CongestionTaxCalculator.Infrastructure.Persistence;
+﻿using CongestionTaxCalculator.Domain.CityManagement.Entities;
+using CongestionTaxCalculator.Domain.TaxCalculation.Entities;
+using CongestionTaxCalculator.Domain.TaxCalculation.ValueObjects;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
+using CongestionTaxCalculator.Infrastructure.Persistence.DbContexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

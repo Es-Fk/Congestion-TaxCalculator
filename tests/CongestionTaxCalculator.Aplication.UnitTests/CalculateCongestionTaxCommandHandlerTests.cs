@@ -1,10 +1,10 @@
 ﻿using CongestionTaxCalculator.Application.Common.Exceptions;
 using CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Commands;
-using CongestionTaxCalculator.Domain.DomainServices;
-using CongestionTaxCalculator.Domain.Entities;
-using CongestionTaxCalculator.Domain.Entities.Enums;
-using CongestionTaxCalculator.Domain.Interfaces.Repositories;
-using CongestionTaxCalculator.Domain.ValueObjects;
+using CongestionTaxCalculator.Domain.CityManagement.Services.Interfaces;
+using CongestionTaxCalculator.Domain.TaxCalculation.Entities;
+using CongestionTaxCalculator.Domain.TaxCalculation.Repositories;
+using CongestionTaxCalculator.Domain.TaxCalculation.ValueObjects;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 using Moq;
 
 namespace CongestionTaxCalculator.Aplication.UnitTests

@@ -1,4 +1,4 @@
-﻿using CongestionTaxCalculator.Domain.ValueObjects;
+﻿using CongestionTaxCalculator.Domain.TaxCalculation.ValueObjects;
 
 namespace CongestionTaxCalculator.Domain.UnitTests
 {

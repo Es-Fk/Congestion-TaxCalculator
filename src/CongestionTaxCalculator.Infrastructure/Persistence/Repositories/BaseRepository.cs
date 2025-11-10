@@ -1,5 +1,6 @@
-﻿using CongestionTaxCalculator.Domain.Common;
-using CongestionTaxCalculator.Domain.Interfaces.Repositories;
+﻿using CongestionTaxCalculator.Domain.CityManagement.Repositories;
+using CongestionTaxCalculator.Domain.Common.Interfaces;
+using CongestionTaxCalculator.Infrastructure.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace CongestionTaxCalculator.Infrastructure.Persistence.Repositories

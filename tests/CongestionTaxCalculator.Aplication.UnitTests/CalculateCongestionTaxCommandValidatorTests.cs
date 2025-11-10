@@ -1,5 +1,5 @@
 ﻿using CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Commands;
-using CongestionTaxCalculator.Domain.Entities.Enums;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 
 namespace CongestionTaxCalculator.Aplication.UnitTests
 {

@@ -1,5 +1,6 @@
 ﻿using CongestionTaxCalculator.Application.Common.Behaviors;
-using CongestionTaxCalculator.Domain.DomainServices;
+using CongestionTaxCalculator.Domain.CityManagement.Services.Interfaces;
+using CongestionTaxCalculator.Domain.TaxCalculation.DomainServices;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

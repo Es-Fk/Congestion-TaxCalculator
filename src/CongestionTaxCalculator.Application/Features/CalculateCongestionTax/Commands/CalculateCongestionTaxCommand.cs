@@ -1,5 +1,5 @@
-﻿using CongestionTaxCalculator.Domain.Entities.Enums;
-using CongestionTaxCalculator.Domain.ValueObjects;
+﻿using CongestionTaxCalculator.Domain.TaxCalculation.ValueObjects;
+using CongestionTaxCalculator.Domain.VehicleManagement.Entities.Enums;
 using MediatR;
 
 namespace CongestionTaxCalculator.Application.Features.CalculateCongestionTax.Commands
